@@ -151,7 +151,7 @@ class custom_Electra(nn.Module):
         # get generator output and get mlm loss
         logits = self.generator(masked_input,
                                 token_type_ids=token_type_ids,
-                                attention_mask=attention_mask)
+                                attention_mask=attention_mask)['logits']
 
         mlm_loss = F.cross_entropy(
             logits.transpose(1, 2),
@@ -178,7 +178,7 @@ class custom_Electra(nn.Module):
         # get discriminator output and binary cross entropy loss
         disc_logits = self.discriminator(disc_input, 
                                          token_type_ids=token_type_ids,
-                                         attention_mask=attention_mask)
+                                         attention_mask=attention_mask)['logits']
         disc_logits = disc_logits.reshape_as(disc_labels)
 
         disc_loss = F.binary_cross_entropy_with_logits(
