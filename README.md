@@ -3,3 +3,4 @@
 
 # 작업한 모델 목록
 Bert
+Electra
